@@ -101,6 +101,9 @@ func Compile(cfg Config) error {
 
 	cfg.Logger.Info("Compiling")
 	cmd := exec.Command(goBinary, "build", "-ldflags=-s -w", "-trimpath", "-o", cfg.Distribution.ExeName)
+	if cfg.Distribution.Debug {
+		cmd = exec.Command(goBinary, "build", "-ldflags=", "-gcflags=all=-N -l", "-trimpath", "-o", cfg.Distribution.ExeName)
+	}
 	cmd.Dir = cfg.Distribution.OutputPath
 	if out, err := cmd.CombinedOutput(); err != nil {
 		return fmt.Errorf("failed to compile the OpenTelemetry Collector distribution: %w. Output: %q", err, out)

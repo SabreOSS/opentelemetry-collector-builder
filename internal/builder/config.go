@@ -53,6 +53,7 @@ type Distribution struct {
 	IncludeCore    bool   `mapstructure:"include_core"`
 	OutputPath     string `mapstructure:"output_path"`
 	Version        string `mapstructure:"version"`
+	Debug          bool   `mapstructure:"debug_compilation"`
 }
 
 // Module represents a receiver, exporter, processor or extension for the distribution
